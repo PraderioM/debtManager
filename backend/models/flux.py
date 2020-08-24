@@ -23,17 +23,4 @@ class Flux:
                     date=date_from_iso_format(date))
 
     def to_database(self) -> List[str]:
-        flux_to_database = []
-        issuer_name = str(self.issuer[0])
-        flux_to_database.append(issuer)
-        receiver_name = str(self.receiver[0])
-        flux_to_database.append(receiver)
-        amount = str(self.amount)
-        flux_to_database.append(amount)
-        concept = str(self.concept)
-        flux_to_database.append(concept)
-        date = str(self.date)
-        flux_to_database.append(date)
-        return flux_to_database
-
-
+        return [self.issuer.name, self.receiver.name, str(self.amount), self.concept, str(self.date)]
