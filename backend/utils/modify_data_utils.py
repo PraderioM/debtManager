@@ -2,6 +2,7 @@ import csv
 
 from backend.models.group import Group
 from backend.models.flow import Flow
+from backend.models.member import Member
 from backend.utils.get_path_utils import *
 from backend.utils.get_data_utils import get_groups_data, get_members_data, get_periodic_flow_data, get_flow_data
 
@@ -26,13 +27,11 @@ def modify_flow_data(flow: Flow, id_: int, group_name: str):
             writer.writerow(flow.to_database())
 
 
-def modify_members_data(group: Group, id_: int):
-    # Todo
-    _list = get_groups_data()
-    group_list[id_] = group
+def modify_members_data(member: Member, id_: int, group_name: str):
+    member_list = get_members_data(group_name)
+    member_list[id_] = member
 
-    with open(get_group_data_file_path(), 'w') as data_file:
+    with open(get_members_data_file_path(group_name), 'w') as data_file:
         writer = csv.writer(data_file)
-        for group in group_list:
-            writer.writerow(group.to_database())
-
+        for member in member_list:
+            writer.writerow(member.to_database())
