@@ -17,8 +17,10 @@ def get_groups_data() -> List[Group]:
     group_list: List[Group] = []
     with open(get_group_data_file_path(), 'r') as data_file:
         reader = csv.reader(data_file)
-        for group_name, mailgun_1, mailgun_2 in reader:
-            group_list.append(Group(name=group_name, mailgun_1=mailgun_1, mailgun_2=mailgun_2))
+        for row in reader:
+            if len(row) == 0:
+                continue
+            group_list.append(Group.from_database(row))
 
     return group_list
 
@@ -28,11 +30,10 @@ def get_members_data(group_name: str) -> List[Member]:
 
     with open(get_members_data_file_path(group_name), 'r') as data_file:
         reader = csv.reader(data_file)
-        for name, e_mail, creditor_threshold, debtor_threshold in reader:
-            member_list.append(Member(name=name,
-                                      e_mail=e_mail,
-                                      creditor_threshold=float(creditor_threshold),
-                                      debtor_threshold=float(debtor_threshold)))
+        for row in reader:
+            if len(row) == 0:
+                continue
+            member_list.append(Member.from_database(row))
 
     return member_list
 
@@ -43,21 +44,11 @@ def get_periodic_flux_data(group_name: str) -> List[PeriodicFlux]:
     periodic_flux_list: List[PeriodicFlux] = []
     with open(get_periodic_flux_data_file_path(group_name), 'r') as data_file:
         reader = csv.reader(data_file, delimiter='\t')
-        for amount_payed, period, pay_day, last_payed, issuer_name, receiver_list_data, is_update_automatic in reader:
-            amount_payed = None if amount_payed == NONE_STRING else float(amount_payed)
-            is_update_automatic = True if is_update_automatic == TRUE_STRING else False
-            issuer = get_member_by_name(issuer_name, member_list)
-            receiver_list = [
-                (get_member_by_name(receiver_name, member_list), float(burden))
-                for receiver_name, burden in json.loads(receiver_list_data)
-            ]
-            periodic_flux_list.append(PeriodicFlux(amount_payed=amount_payed,
-                                                   period=int(period),
-                                                   pay_day=int(pay_day),
-                                                   last_payed=date_from_iso_format(last_payed),
-                                                   issuer=issuer,
-                                                   receiver_list=receiver_list,
-                                                   is_update_automatic=is_update_automatic))
+        for row in reader:
+            if len(row) == 0:
+                continue
+
+            periodic_flux_list.append(PeriodicFlux.from_database(row, member_list=member_list))
 
     return periodic_flux_list
 
@@ -68,11 +59,10 @@ def get_flux_data(group_name: str, date: Optional[datetime.date] = None) -> List
 
     with open(get_flux_data_file_path(group_name, date=date), 'r') as data_file:
         reader = csv.reader(data_file)
-        for issuer_name, receiver_name, amount, concept, date in reader:
-            flux_list.append(Flux(issuer=get_member_by_name(issuer_name, member_list),
-                                  receiver=get_member_by_name(receiver_name, member_list),
-                                  amount=float(amount),
-                                  concept=concept,
-                                  date=date_from_iso_format(date)))
+        for row in reader:
+            if len(row) == 0:
+                continue
+
+            flux_list.append(Flux.from_database(row, member_list=member_list))
 
     return flux_list

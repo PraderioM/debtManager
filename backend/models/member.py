@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 
 class Member:
@@ -9,3 +9,11 @@ class Member:
         self._e_mail = e_mail
         self.creditor_threshold = creditor_threshold
         self.debtor_threshold = debtor_threshold
+
+    @classmethod
+    def from_database(cls, database_data: List[str]) -> 'Member':
+        name, e_mail, creditor_threshold, debtor_threshold = database_data
+        return Member(name=name,
+                      e_mail=e_mail,
+                      creditor_threshold=float(creditor_threshold),
+                      debtor_threshold=float(debtor_threshold))
