@@ -34,7 +34,6 @@ def get_flow_data(group_name: str) -> List[Flow]:
     return flow_list
 
 
-
 def get_members_data(group_name: str) -> List[Member]:
     member_list: List[Member] = []
 
