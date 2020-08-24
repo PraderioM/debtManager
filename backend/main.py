@@ -6,7 +6,7 @@ import os
 from aiohttp import web
 import aiohttp_cors
 
-from .endpoints.collect_endpoints import collect_endpoints
+from backend.endpoints.collect_endpoints import collect_endpoints
 from backend.utils.check_messages_to_send import check_messages_to_send
 from backend.utils.check_periodic_debts import check_periodic_debts
 
@@ -24,7 +24,7 @@ async def create_app():  # Start the app
     })
 
     # Register handlers.
-    collect_endpoints(app)
+    collect_endpoints(app_)
 
     # Configure CORS on all routes (deactivate it).
     for route in list(app_.router.routes()):

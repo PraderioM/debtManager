@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from backend.utils.get_path_utils import get_lock_data_file_path
 
 
-def check_if_locked(token: str, secs_thr: int = 5) -> bool:
+def is_locked(token: str, secs_thr: int = 5) -> bool:
     with open(get_lock_data_file_path()) as data_file:
         json_data = json.load(data_file)
 
@@ -26,3 +26,9 @@ def check_if_locked(token: str, secs_thr: int = 5) -> bool:
     else:
         # Database has been accessed by someone else very little time from now. you cannot access it now.
         return True
+
+
+def update_lock(token: str):
+    with open(get_lock_data_file_path(), 'w') as data_file:
+        now = datetime.now()
+        json.dump({'last_connection': str(now), 'token': token}, data_file)
