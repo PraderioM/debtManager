@@ -1,4 +1,6 @@
 import asyncio
+import threading
+from typing import Callable
 import os
 
 from aiohttp import web
@@ -31,9 +33,17 @@ async def create_app():  # Start the app
     return app_
 
 
+def loop_in_thread(event_loop: asyncio.BaseEventLoop, function: Callable):
+    asyncio.set_event_loop(event_loop)
+    event_loop.run_until_complete(function())
+
+
 if __name__ == "__main__":
+    # Create and run web app.
     loop = asyncio.get_event_loop()
     app = loop.run_until_complete(create_app())
-    loop.run_forever(check_periodic_debts())
-    loop.run_forever(check_messages_to_send())
     web.run_app(app, host=os.environ.get('HOST', '0.0.0.0'), port=os.environ.get('PORT', 2121))
+
+    # Run continuous checks.
+    threading.Thread(target=loop_in_thread, args=(loop, check_periodic_debts)).start()
+    threading.Thread(target=loop_in_thread, args=(loop, check_messages_to_send)).start()
