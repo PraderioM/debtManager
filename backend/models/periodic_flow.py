@@ -2,14 +2,14 @@ from datetime import date
 import json
 from typing import List, Optional, Tuple
 
-from .flux import Flux
+from .flow import Flow
 from .member import Member
 from .typing_hints import Burden
 from backend.constants import NONE_STRING, TRUE_STRING
 from backend.utils.utils import date_from_iso_format, get_member_by_name
 
 
-class PeriodicFlux:
+class PeriodicFlow:
     def __init__(self, amount_payed: Optional[float],
                  period: int, pay_day: int, last_payed: date,
                  issuer: Member,
@@ -24,7 +24,7 @@ class PeriodicFlux:
         self.is_update_automatic = is_update_automatic
 
     @classmethod
-    def from_database(cls, database_data: List[str], member_list: List[Member]) -> 'PeriodicFlux':
+    def from_database(cls, database_data: List[str], member_list: List[Member]) -> 'PeriodicFlow':
         amount_payed, period, pay_day, last_payed, issuer_name, receiver_list_data, is_update_automatic = database_data
         amount_payed = None if amount_payed == NONE_STRING else float(amount_payed)
         is_update_automatic = True if is_update_automatic == TRUE_STRING else False
@@ -33,7 +33,7 @@ class PeriodicFlux:
             (get_member_by_name(receiver_name, member_list), float(burden))
             for receiver_name, burden in json.loads(receiver_list_data)
         ]
-        return PeriodicFlux(amount_payed=amount_payed,
+        return PeriodicFlow(amount_payed=amount_payed,
                             period=int(period),
                             pay_day=int(pay_day),
                             last_payed=date_from_iso_format(last_payed),
@@ -46,7 +46,7 @@ class PeriodicFlux:
                 str(self.receiver_list), str(self.is_update_automatic)]
 
 
-    def generate_fluxes(self) -> List[Flux]:
+    def generate_fluxes(self) -> List[Flow]:
         # todo implement.
         pass
 
