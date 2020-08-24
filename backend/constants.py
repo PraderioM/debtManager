@@ -1,0 +1,10 @@
+DATA_DIR_PATH = '../data'
+LOCK_FILE_NAME = 'is_connected.json'
+GROUP_DATA_FILE_NAME = 'groups.csv'
+MEMBERS_DATA_FILE_NAME = 'members.csv'
+PERIODIC_FLUX_DATA_FILE_NAME = 'periodic_fluxes.csv'
+FLUX_DATA_DIR_NAME = 'fluxes'
+
+NONE_STRING = 'unknown'
+TRUE_STRING = 'TRUE'
+FALSE_STRING = 'FALSE'

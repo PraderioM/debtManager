@@ -7,8 +7,8 @@ from aiohttp import web
 import aiohttp_cors
 
 from .endpoints.collect_endpoints import collect_endpoints
-from .check_messages_to_send import check_messages_to_send
-from .check_periodic_debts import check_periodic_debts
+from backend.utils.check_messages_to_send import check_messages_to_send
+from backend.utils.check_periodic_debts import check_periodic_debts
 
 
 async def create_app():  # Start the app
