@@ -4,13 +4,13 @@ import json
 from typing import List, Optional
 
 from backend.constants import NONE_STRING, TRUE_STRING
-from .get_path_utils import get_group_data_file_path, get_members_data_file_path, \
-    get_periodic_flux_data_file_path, get_flux_data_file_path
+from .get_path_utils import get_group_data_file_path, get_members_data_file_path
+from .get_path_utils import get_periodic_flux_data_file_path, get_flux_data_file_path
 from backend.models.group import Group
 from backend.models.member import Member
 from backend.models.periodic_flux import PeriodicFlux
 from backend.models.flux import Flux
-from backend.utils import get_member_by_name, date_from_iso_format
+from backend.utils.utils import get_member_by_name, date_from_iso_format
 
 
 def get_groups_data() -> List[Group]:
