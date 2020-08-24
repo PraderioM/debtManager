@@ -4,7 +4,9 @@ import os
 from aiohttp import web
 import aiohttp_cors
 
-from backend.endpoints.collect_endpoints import collect_endpoints
+from .endpoints.collect_endpoints import collect_endpoints
+from .check_messages_to_send import check_messages_to_send
+from .check_periodic_debts import check_periodic_debts
 
 
 async def create_app():  # Start the app
@@ -32,4 +34,6 @@ async def create_app():  # Start the app
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     app = loop.run_until_complete(create_app())
+    loop.run_forever(check_periodic_debts())
+    loop.run_forever(check_messages_to_send())
     web.run_app(app, host=os.environ.get('HOST', '0.0.0.0'), port=os.environ.get('PORT', 2121))
