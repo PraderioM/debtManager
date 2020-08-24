@@ -5,7 +5,7 @@ from aiohttp import web
 
 from backend.utils.check_if_locked import check_if_locked
 from backend.utils.get_data_utils import get_members_data
-from backend.utils.add_data_utils import add_members_data
+from backend.utils.add_data_utils import add_flow_data
 from backend.models.flow import Flow
 
 
@@ -25,15 +25,8 @@ async def add_flow(request: web.Request) -> web.Response:
     flow = Flow.from_database(database_data, get_members_data(data['group_name']))
 
     # Adding flow inputs from frontend into database.
-    add_members_data(flow, data['group_name'])
-
+    add_flow_data(flow, data['group_name'])
     return web.Response(
         status=201,
         body="Flow added successfully."
     )
-
-
-
-
-
-    # return a frontend, status 200
