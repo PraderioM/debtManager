@@ -11,5 +11,4 @@ class Group:
         return Group(name=name, mailgun_1=mailgun_1, mailgun_2=mailgun_2)
 
     def to_database(self) -> List[str]:
-        # Todo implement.
-        pass
+        return [self.name, self.mailgun_1, self.mailgun_2]
