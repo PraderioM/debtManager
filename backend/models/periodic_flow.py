@@ -46,7 +46,7 @@ class PeriodicFlow:
                 str(self.receiver_list), str(self.is_update_automatic)]
 
 
-    def generate_fluxes(self) -> List[Flow]:
+    def generate_periodic_flows(self) -> List[Flow]:
         # todo implement.
         pass
 
