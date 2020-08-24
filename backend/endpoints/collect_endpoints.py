@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from .add_debt import add_debt
+from .add_flow import add_debt
 from .verify_connection import verify_connection
 from .get_token import get_token
 

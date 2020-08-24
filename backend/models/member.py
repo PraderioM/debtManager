@@ -19,5 +19,4 @@ class Member:
                       debtor_threshold=float(debtor_threshold))
 
     def to_database(self) -> List[str]:
-        # Todo implement.
-        pass
+        return [self.name, self.e_mail, str(self.creditor_threshold), str(self.debtor_threshold)]
