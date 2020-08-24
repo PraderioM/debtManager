@@ -1,7 +1,7 @@
 import datetime
-from typing import List, Optional
+from typing import Dict, List, Optional
 
-from .member import Member
+from backend.models.member import Member
 from backend.utils.utils import date_from_iso_format, get_member_by_name
 
 
@@ -22,5 +22,22 @@ class Flow:
                     concept=concept,
                     date=date_from_iso_format(date))
 
+    @classmethod
+    def from_frontend(cls, frontend_data: Dict) -> 'Flow':
+        return Flow(issuer=Member.from_frontend(frontend_data['issuer']),
+                    receiver=Member.from_frontend(frontend_data['receiver']),
+                    amount=frontend_data['amount'],
+                    concept=frontend_data['concept'],
+                    date=date_from_iso_format(frontend_data['date']))
+
     def to_database(self) -> List[str]:
         return [self.issuer.name, self.receiver.name, str(self.amount), self.concept, str(self.date)]
+
+    def to_frontend(self) -> Dict:
+        return {
+            'issuer': self.issuer.to_frontend(),
+            'receiver': self.receiver.to_frontend(),
+            'amount': self.amount,
+            'concept': self.concept,
+            'date': str(self.date),
+        }

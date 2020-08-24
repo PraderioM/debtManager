@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Dict, List, Optional, Union
 
 
 class Member:
@@ -18,5 +18,27 @@ class Member:
                       creditor_threshold=float(creditor_threshold),
                       debtor_threshold=float(debtor_threshold))
 
+    @classmethod
+    def from_frontend(cls, frontend_data: Dict[str, Union[str, float]]) -> 'Member':
+        return Member(name=frontend_data['name'],
+                      e_mail=frontend_data['eMail'],
+                      creditor_threshold=frontend_data['creditorThreshold'],
+                      debtor_threshold=frontend_data['debtorThreshold'])
+
     def to_database(self) -> List[str]:
         return [self.name, self.e_mail, str(self.creditor_threshold), str(self.debtor_threshold)]
+
+    def to_frontend(self) -> Dict[str, Union[str, float]]:
+        return {
+            'name': self.name,
+            'eMail': self.e_mail,
+            'creditorThreshold': self.creditor_threshold,
+            'debtor_threshold': self.debtor_threshold
+        }
+
+    @property
+    def e_mail(self) -> str:
+        if self._e_mail is None:
+            return ''
+        else:
+            return self._e_mail

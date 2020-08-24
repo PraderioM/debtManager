@@ -1,10 +1,10 @@
 from datetime import date
 import json
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
-from .flow import Flow
-from .member import Member
-from .typing_hints import Burden
+from backend.models.flow import Flow
+from backend.models.member import Member
+from backend.models.typing_hints import Burden
 from backend.constants import NONE_STRING, TRUE_STRING
 from backend.utils.utils import date_from_iso_format, get_member_by_name
 
@@ -41,10 +41,34 @@ class PeriodicFlow:
                             receiver_list=receiver_list,
                             is_update_automatic=is_update_automatic)
 
+    @classmethod
+    def from_frontend(cls, frontend_data: Dict):
+        receiver_list = [
+            (Member.from_frontend(member_data), burden)
+            for member_data, burden in frontend_data['receiverList']
+        ]
+        return PeriodicFlow(amount_payed=frontend_data['amountPayed'],
+                            period=frontend_data['period'],
+                            pay_day=frontend_data['payDay'],
+                            last_payed=date_from_iso_format(frontend_data['lastPayed']),
+                            issuer=Member.from_frontend(frontend_data['issuer']),
+                            receiver_list=receiver_list,
+                            is_update_automatic=frontend_data['isUpdateAutomatic'])
+
     def to_database(self) -> List[str]:
         return [str(self.amount_payed), str(self.period), str(self.pay_day), str(self.last_payed), self.issuer.name,
                 str(self.receiver_list), str(self.is_update_automatic)]
 
+    def to_frontend(self) -> Dict:
+        return {
+            'amountPayed': self.amount_payed,
+            'period': self.period,
+            'payDay': self.pay_day,
+            'lastPayed': str(self.last_payed),
+            'issuer': self.issuer.to_frontend(),
+            'receiverList': [(receiver.to_frontend(), burden) for receiver, burden in self.receiver_list],
+            'isUpdateAutomatic': self.is_update_automatic
+        }
 
     def generate_periodic_flows(self) -> List[Flow]:
         # todo implement.
