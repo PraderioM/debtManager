@@ -21,6 +21,20 @@ def get_groups_data() -> List[Group]:
     return group_list
 
 
+def get_flow_data(group_name: str) -> List[Flow]:
+    flow_list: List[Flow] = []
+    member_list = get_members_data(group_name)
+
+    with open(get_flow_data_file_path(group_name), 'r') as data_file:
+        reader = csv.reader(data_file)
+        for row in reader:
+            if len(row) == 0:
+                continue
+            flow_list.append(Flow.from_database(row, member_list=member_list))
+    return flow_list
+
+
+
 def get_members_data(group_name: str) -> List[Member]:
     member_list: List[Member] = []
 
@@ -49,14 +63,3 @@ def get_periodic_flow_data(group_name: str) -> List[PeriodicFlow]:
     return periodic_flow_list
 
 
-def get_flow_data(group_name: str) -> List[Flow]:
-    flow_list: List[Flow] = []
-    member_list = get_members_data(group_name)
-
-    with open(get_flow_data_file_path(group_name), 'r') as data_file:
-        reader = csv.reader(data_file)
-        for row in reader:
-            if len(row) == 0:
-                continue
-            flow_list.append(Flow.from_database(row, member_list=member_list))
-    return flow_list

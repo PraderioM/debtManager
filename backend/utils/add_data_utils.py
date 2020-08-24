@@ -9,8 +9,10 @@ from backend.models.member import Member
 
 def add_group_data(group: Group):
     data_path = get_group_data_file_path()
+    # Determine if file will be opened with "append" or "write", depending if file already exists or not.
     open_mode = _get_open_mode(data_path)
     os.makedirs(get_group_data_dir(group.name), exist_ok=True)
+    # Edit file (writing or appending)
     with open(data_path, open_mode) as data_file:
         writer = csv.writer(data_file)
         writer.writerow(group.to_database())
@@ -18,7 +20,9 @@ def add_group_data(group: Group):
 
 def add_flow_data(flow: Flow, group_name: str):
     data_path = get_flow_data_file_path(group_name)
+    # Determine if file will be opened with "append" or "write", depending if file already exists or not.
     open_mode = _get_open_mode(data_path)
+    # Edit file (writing or appending)
     with open(data_path, open_mode) as data_file:
         writer = csv.writer(data_file)
         writer.writerow(flow.to_database())
@@ -26,7 +30,9 @@ def add_flow_data(flow: Flow, group_name: str):
 
 def add_periodic_flow_data(periodic_flow: PeriodicFlow, group_name: str):
     data_path = get_periodic_flow_data_file_path(group_name)
+    # Determine if file will be opened with "append" or "write", depending if file already exists or not.
     open_mode = _get_open_mode(data_path)
+    # Edit file (writing or appending)
     with open(data_path, open_mode) as data_file:
         writer = csv.writer(data_file, delimiter='\t')
         writer.writerow(periodic_flow.to_database())
@@ -34,7 +40,9 @@ def add_periodic_flow_data(periodic_flow: PeriodicFlow, group_name: str):
 
 def add_member_data(member: Member, group_name: str):
     data_path = get_members_data_file_path(group_name)
+    # Determine if file will be opened with "append" or "write", depending if file already exists or not.
     open_mode = _get_open_mode(data_path)
+    # Edit file (writing or appending)
     with open(data_path, open_mode) as data_file:
         writer = csv.writer(data_file)
         writer.writerow(member.to_database())
