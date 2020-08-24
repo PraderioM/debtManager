@@ -42,8 +42,9 @@ class PeriodicFlux:
                             is_update_automatic=is_update_automatic)
 
     def to_database(self) -> List[str]:
-        # Todo implement.
-        pass
+        return [str(self.amount_payed), str(self.period), str(self.pay_day), str(self.last_payed), self.issuer.name,
+                str(self.receiver_list), str(self.is_update_automatic)]
+
 
     def generate_fluxes(self) -> List[Flux]:
         # todo implement.
