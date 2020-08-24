@@ -9,3 +9,7 @@ class Group:
     def from_database(cls, database_data: List[str]) -> 'Group':
         name, mailgun_1, mailgun_2 = database_data
         return Group(name=name, mailgun_1=mailgun_1, mailgun_2=mailgun_2)
+
+    def to_database(self) -> List[str]:
+        # Todo implement.
+        pass

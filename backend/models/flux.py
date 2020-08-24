@@ -21,3 +21,7 @@ class Flux:
                     amount=float(amount),
                     concept=concept,
                     date=date_from_iso_format(date))
+
+    def to_database(self) -> List[str]:
+        # Todo implement.
+        pass

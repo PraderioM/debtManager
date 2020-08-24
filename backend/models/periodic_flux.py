@@ -41,6 +41,10 @@ class PeriodicFlux:
                             receiver_list=receiver_list,
                             is_update_automatic=is_update_automatic)
 
+    def to_database(self) -> List[str]:
+        # Todo implement.
+        pass
+
     def generate_fluxes(self) -> List[Flux]:
         # todo implement.
         pass
