@@ -1,11 +1,15 @@
 import os
 
 from backend.constants import DATA_DIR_PATH, GROUP_DATA_FILE_NAME, MEMBERS_DATA_FILE_NAME
-from backend.constants import PERIODIC_FLOW_DATA_FILE_NAME, FLOW_DATA_FILE_NAME
+from backend.constants import PERIODIC_FLOW_DATA_FILE_NAME, FLOW_DATA_FILE_NAME, LOCK_FILE_NAME
 
 
 def get_group_data_file_path() -> str:
     return os.path.join(DATA_DIR_PATH, GROUP_DATA_FILE_NAME)
+
+
+def get_lock_data_file_path() -> str:
+    return os.path.join(DATA_DIR_PATH, LOCK_FILE_NAME)
 
 
 def get_group_data_dir(group_name: str) -> str:
