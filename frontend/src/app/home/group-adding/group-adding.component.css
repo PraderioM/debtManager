@@ -1,5 +1,8 @@
-.group-adding-button {
-  border: none;
+.table {
   display: inline-flex;
   align-items: center;
+}
+
+.error {
+  color: red;
 }

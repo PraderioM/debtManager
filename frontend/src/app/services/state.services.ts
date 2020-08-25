@@ -17,14 +17,24 @@ export class StateService {
 
   async getGroupList(): Promise<Group[]> {
     return await this.http
-      .get<Group[]>(this.backendURL + '/get-group-list')
+      .get<Group[]>(this.backendURL + '/get-group-list',
+                {params: new HttpParams()})
       .toPromise();
   }
 
   async verifyConnection(userToken: string): Promise<void> {
-    await this.http
-      .post(this.backendURL + '/verify-connection',
-        {token: userToken})
-      .toPromise();
+    await this.http.post<void>(this.backendURL + '/verify-connection',
+                               '',
+                       {
+                         params: new HttpParams().set('token', userToken)
+                       }).toPromise();
+  }
+
+  async addGroup(name: string, mg1: string, mg2: string): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/verify-connection',
+      '',
+      {
+        params: new HttpParams().set('name', name).set('mailgun1', mg1).set('mailgun2', mg2)
+      }).toPromise();
   }
 }

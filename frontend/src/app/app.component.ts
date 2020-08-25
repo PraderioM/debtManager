@@ -36,6 +36,9 @@ export class AppComponent implements OnInit  {
   }
 
   async verifyConnection(): Promise<void> {
+    if (this.token === null || this.token === undefined) {
+      await this.updateToken();
+    }
     await this.stateService.verifyConnection(this.token);
   }
 

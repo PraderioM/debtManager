@@ -1,0 +1,40 @@
+<table class="table">
+  <tr>
+    <th>
+      <label for="name" [ngClass]="getNameNgClass()">Group name</label>
+    </th>
+    <th>
+      <input #name id="name" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="mg1">Mailgun 1</label>
+    </th>
+    <th>
+      <input #mg1 id="mg1" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="mg2">Expansion</label>
+    </th>
+    <th>
+      <input #mg2 id="mg2" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <button
+        (click)="tryCreateGame(name.value, mg1.value, mg2.value)">
+        Create group
+      </button>
+      <button (click)="back.emit()">
+        Cancel
+      </button>
+    </th>
+  </tr>
+</table>

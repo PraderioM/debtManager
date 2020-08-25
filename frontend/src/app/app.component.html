@@ -2,5 +2,5 @@
   <span (click)="selectItem('home')" [ngClass]="getNgClass('home')">home</span>
   <span *ngFor="let group of groupList" [ngClass]="getNgClass(group.name)">{{group.name}}</span>
 </div>
-<app-home *ngIf="selectedItem === 'home'"></app-home>
+<app-home *ngIf="selectedItem === 'home'" [groupList]="groupList" (updateGroups)="updateGroupList()"></app-home>
 <app-group *ngIf="selectedItem !== 'home'" [group]="getSelectedGroup()"></app-group>
