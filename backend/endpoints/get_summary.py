@@ -10,7 +10,7 @@ from backend.utils.utils import get_member_by_name
 
 
 async def get_summary(request: web.Request) -> web.Response:
-    group_name = request.rel_url.query['groupName']
+    group_name = request.rel_url.query['group_name']
 
     flow_list = get_compensating_flows(group_name=group_name)
 
