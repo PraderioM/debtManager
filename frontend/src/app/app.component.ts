@@ -60,4 +60,23 @@ export class AppComponent implements OnInit  {
       }
     }
   }
+
+  getSelectedGroupIndex(): number {
+    for (let i = 0; i < this.groupList.length; i++) {
+      const group = this.groupList[i];
+      if (group.name === this.selectedItem) {
+        return i;
+      }
+    }
+  }
+
+  async onBackHome(): Promise<void> {
+    this.selectedItem = 'home';
+    await this.updateGroupList();
+  }
+
+  async onRefresh(groupName: string): Promise<void> {
+    this.selectedItem = groupName;
+    await this.updateGroupList();
+  }
 }

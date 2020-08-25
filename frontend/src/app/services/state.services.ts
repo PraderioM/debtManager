@@ -136,4 +136,21 @@ export class StateService {
         params: new HttpParams().set('token', token).set('group_name', groupName).set('id', flowIndex.toString())
       }).toPromise();
   }
+
+  async updateGroup(token: string, groupIndex: number, groupName: string, mailgun1: string, mailgun2: string): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/update-group',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('id', groupIndex.toString()).set('group_name', groupName)
+                                .set('mailgun_1', mailgun1).set('mailgun_2', mailgun2)
+      }).toPromise();
+  }
+
+  async removeGroup(token: string, groupIndex: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/remove-group',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('id', groupIndex.toString())
+      }).toPromise();
+  }
 }

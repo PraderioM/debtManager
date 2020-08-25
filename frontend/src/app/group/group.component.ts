@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Group} from '../services/models/group';
 
 @Component({
@@ -9,6 +9,10 @@ import {Group} from '../services/models/group';
 export class GroupComponent implements OnInit {
   @Input() token: string;
   @Input() group: Group;
+  @Input() groupIndex: number;
+
+  @Output() back = new EventEmitter<void>();
+  @Output() refresh = new EventEmitter<void>();
 
   selectedItem = 'summary';
 
@@ -27,5 +31,4 @@ export class GroupComponent implements OnInit {
       'selected-header': this.selectedItem === name
     };
   }
-
 }
