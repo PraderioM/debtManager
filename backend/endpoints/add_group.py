@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from backend.utils.check_if_locked import check_if_locked
+from backend.utils.lock_utils import is_locked
 from backend.utils.add_data_utils import add_group_data
 from backend.models.group import Group
 
@@ -10,7 +10,7 @@ async def add_group(request: web.Request) -> web.Response:
 
     # Checking if member is locked.
     token = data["token"]
-    if check_if_locked(token):
+    if is_locked(token):
         return web.Response(
             status=200,
             body="Another person is using the app, sorry. You cannot modify stuff."
