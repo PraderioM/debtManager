@@ -40,6 +40,13 @@
       <button (click)="editMember(name.value, eMail.value, creditorThr.valueAsNumber, debtorThr.valueAsNumber)">
         {{getButtonName()}}
       </button>
+    </th>
+    <th *ngIf="memberIndex != null">
+      <button (click)="removeMember()">
+        Remove
+      </button>
+    </th>
+    <th>
       <button (click)="back.emit()">
         Cancel
       </button>

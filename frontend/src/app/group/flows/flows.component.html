@@ -1,0 +1,43 @@
+<div *ngIf="!editionMode">
+  <p>
+    <button (click)="enterCreationMode()">Add flow</button>
+  </p>
+  <table>
+    <tr>
+      <th>
+        issuer
+      </th>
+      <th>
+        receiver
+      </th>
+      <th>
+        amount
+      </th>
+      <th>
+      </th>
+    </tr>
+    <tr *ngFor="let flow of flowList; let i = index">
+      <th>
+        {{flow.issuer.name}}
+      </th>
+      <th>
+        {{flow.receiver.name}}
+      </th>
+      <th>
+        {{round(flow.amount)}}
+      </th>
+      <th>
+        <button (click)="enterModificationMode(flow, i)">Edit</button>
+      </th>
+    </tr>
+  </table>
+</div>
+<app-flow-edition *ngIf="editionMode"
+                  [group]="group"
+                  [flow]="selectedFlow"
+                  [flowIndex]="selectedFlowIndex"
+                  [memberList]="memberList"
+                  [token]="token"
+                  (back)="onBackFromEdition()">
+
+</app-flow-edition>

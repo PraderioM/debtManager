@@ -9,6 +9,7 @@ import {Flow} from '../../services/models/flow';
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit {
+  @Input() token: string;
   @Input() group: Group;
 
   flowList: Flow[] = [];
@@ -25,5 +26,9 @@ export class SummaryComponent implements OnInit {
 
   async updateFlowList(): Promise<void> {
     this.flowList = await this.stateService.getSummary(this.group.name);
+  }
+
+  async addFlow(flow: Flow): Promise<void> {
+    await this.stateService.addFlow(this.token, this.group.name, flow.issuer.name, flow.receiver.name, flow.amount);
   }
 }

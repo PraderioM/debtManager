@@ -1,0 +1,66 @@
+<table>
+  <tr>
+    <th>
+      Date
+    </th>
+    <th>
+      {{flow.date}}
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      issuer
+    </th>
+    <th>
+      <select  id="issuer">
+        <option *ngFor="let member of memberList"
+                [selected]="issuerName == member.name"
+                (select)="updateIssuer(member)">
+          {{member.name}}
+        </option>
+      </select>
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      receiver
+    </th>
+    <th>
+      <select  id="receiver">
+        <option *ngFor="let member of memberList"
+                [selected]="receiverName == member.name"
+                (select)="updateReceiver(member)">
+          {{member.name}}
+        </option>
+      </select>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="amount">amount</label>
+    </th>
+    <th>
+      <input #amount id="amount" type="number" value="{{amount}}">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <button (click)="editFlow(amount.value)">
+        {{getButtonName()}}
+      </button>
+    </th>
+    <th *ngIf="flowIndex != null">
+      <button (click)="removeFlow()">
+        Remove
+      </button>
+    </th>
+    <th>
+      <button (click)="back.emit()">
+        Cancel
+      </button>
+    </th>
+  </tr>
+</table>

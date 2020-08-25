@@ -75,8 +75,8 @@ export class StateService {
       '',
       {
         params: new HttpParams().set('token', token).set('group_name', groupName).set('name', name)
-                                .set('e_mail', eMail).set('creditor_thr', creditorThr.toString())
-                                .set('debtor_thr', debtorThr.toString())
+          .set('e_mail', eMail).set('creditor_thr', creditorThr.toString())
+          .set('debtor_thr', debtorThr.toString())
       }).toPromise();
   }
 
@@ -88,6 +88,52 @@ export class StateService {
         params: new HttpParams().set('token', token).set('group_name', groupName).set('id', memberIndex.toString())
                                 .set('name', name).set('e_mail', eMail).set('creditor_thr', creditorThr.toString())
                                 .set('debtor_thr', debtorThr.toString())
+      }).toPromise();
+  }
+
+  async removeMember(token: string, groupName: string, memberIndex: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/remove-member',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName).set('id', memberIndex.toString())
+      }).toPromise();
+  }
+
+  async addFlow(token: string, groupName: string, issuerName: string, receiverName: string, amount: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/add-flow',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName)
+                                .set('issuer_name', issuerName).set('receiver_name', receiverName)
+                                .set('amount', amount.toString())
+      }).toPromise();
+  }
+
+  async getFlowList(groupName: string): Promise<Flow[]> {
+    return await this.http
+      .get<Flow[]>(this.backendURL + '/get-flows',
+        {params: new HttpParams().set('group_name', groupName)})
+      .toPromise();
+  }
+
+  async updateFlow(token: string, flowIndex: number, groupName: string,
+                   issuerName: string, receiverName: string,
+                   amount: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/modify-flow',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName)
+          .set('flow_index', flowIndex.toString())
+          .set('issuer_name', issuerName).set('receiver_name', receiverName)
+          .set('amount', amount.toString())
+      }).toPromise();
+  }
+
+  async removeFlow(token: string, groupName: string, flowIndex: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/remove-flow',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName).set('id', flowIndex.toString())
       }).toPromise();
   }
 }

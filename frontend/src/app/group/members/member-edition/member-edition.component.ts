@@ -69,6 +69,14 @@ export class MemberEditionComponent implements OnInit {
     this.back.emit();
   }
 
+  async removeMember(): Promise<void> {
+    // If name is not repeated then we can create a new member.
+    await this.stateService.removeMember(this.token, this.group.name, this.memberIndex);
+
+    // Once done we can go back and update groups.
+    this.back.emit();
+  }
+
   async editMember(name: string, eMail: string, creditorThr: number, debtorThr: number): Promise<void> {
     if (this.memberIndex == null) {
       await this.tryCreateMember(name, eMail, creditorThr, debtorThr);
@@ -76,5 +84,4 @@ export class MemberEditionComponent implements OnInit {
       await this.updateMember(this.memberIndex, name, eMail, creditorThr, debtorThr);
     }
   }
-
 }

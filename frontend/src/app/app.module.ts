@@ -12,6 +12,8 @@ import { ReceiverBurdenComponent } from './group/periodic-flows/receiver-burden/
 import { PeriodicFlowEditionComponent } from './group/periodic-flows/periodic-flow-edition/periodic-flow-edition.component';
 import { MembersComponent } from './group/members/members.component';
 import { MemberEditionComponent } from './group/members/member-edition/member-edition.component';
+import { FlowsComponent } from './group/flows/flows.component';
+import { FlowEditionComponent } from './group/flows/flow-edition/flow-edition.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MemberEditionComponent } from './group/members/member-edition/member-ed
     ReceiverBurdenComponent,
     PeriodicFlowEditionComponent,
     MembersComponent,
-    MemberEditionComponent
+    MemberEditionComponent,
+    FlowsComponent,
+    FlowEditionComponent
   ],
   imports: [
     BrowserModule,

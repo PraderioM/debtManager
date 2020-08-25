@@ -17,7 +17,8 @@
               (updateGroups)="updateGroupList()">
     </app-home>
     <app-group *ngIf="selectedItem != 'home'"
-               [group]="getSelectedGroup()">
+               [group]="getSelectedGroup()"
+               [token]="token">
     </app-group>
   </div>
 </table>

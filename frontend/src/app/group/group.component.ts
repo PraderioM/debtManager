@@ -7,6 +7,7 @@ import {Group} from '../services/models/group';
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
+  @Input() token: string;
   @Input() group: Group;
 
   selectedItem = 'summary';
