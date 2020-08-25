@@ -2,6 +2,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Group} from './models/group';
 import {Flow} from './models/flow';
+import {PeriodicFlow} from './models/periodic.flow';
+import {Member} from './models/member';
 
 @Injectable()
 export class StateService {
@@ -43,6 +45,28 @@ export class StateService {
     return await this.http
       .get<Flow[]>(this.backendURL + '/get-summary',
         {params: new HttpParams().set('group_name', groupName)})
+      .toPromise();
+  }
+
+  async getPeriodicFlowList(groupName: string): Promise<PeriodicFlow[]> {
+    return await this.http
+      .get<PeriodicFlow[]>(this.backendURL + '/get-periodic-flows',
+        {params: new HttpParams().set('group_name', groupName)})
+      .toPromise();
+  }
+
+  async getMemberList(groupName: string): Promise<Member[]> {
+    return await this.http
+      .get<Member[]>(this.backendURL + '/get-members',
+        {params: new HttpParams().set('group_name', groupName)})
+      .toPromise();
+  }
+
+  async removePeriodicFlow(groupName: string, periodicFlowIndex: number): Promise<void> {
+    await this.http
+      .post<void>(this.backendURL + '/remove-periodic-flow',
+        '',
+        {params: new HttpParams().set('group_name', groupName).set('id', periodicFlowIndex.toString())})
       .toPromise();
   }
 }

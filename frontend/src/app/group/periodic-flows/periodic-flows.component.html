@@ -1,0 +1,19 @@
+<div *ngIf="!editionMode">
+  <button (click)="enterCreationMode()">Add periodic flow</button>
+  <p *ngFor="let periodicFlow of periodicFlowList; let i = index">
+    {{periodicFlow.issuer.name}} pays
+    <app-receiver-burden [receiverList]="periodicFlow.receiverList" [totalAmount]="periodicFlow.amountPayed">
+    </app-receiver-burden>
+    on day {{periodicFlow.payDay}} of every {{getPeriodString(periodicFlow.period)}}
+    <button (click)="enterModificationMode(periodicFlow, i)">
+    </button>
+  </p>
+</div>
+<app-periodic-flow-edition *ngIf="editionMode"
+                           [group]="group"
+                           [periodicFlow]="selectedPeriodicFlow"
+                           [periodicFlowIndex]="selectedPeriodicFlowIndex"
+                           (back)="onBackFromEdition()">
+
+</app-periodic-flow-edition>
+

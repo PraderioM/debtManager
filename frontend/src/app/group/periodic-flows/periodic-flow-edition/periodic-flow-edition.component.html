@@ -1,0 +1,115 @@
+<table class="table">
+  <tr>
+    <th>
+      <label for="issuer">Issuer</label>
+    </th>
+    <th>
+      <select id="issuer">
+        <option *ngFor="let currentIssuer of memberList"
+                [selected]="issuer.name == currentIssuer.name"
+                (select)="updateIssuer(currentIssuer)">
+          {{issuer.name}}
+        </option>
+      </select>
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="payDay">Pay day</label>
+    </th>
+    <th>
+      <select id="payDay">
+        <option *ngFor="let value of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"
+                [selected]="value == payDay"
+                (select)="updatePayDay(value)">
+          {{value}}
+        </option>
+      </select>
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="period">Period</label>
+    </th>
+    <th>
+      <select id="period">
+        <option *ngFor="let value of [1,2,3,4,5,6,7,8,9,10,11,12]"
+                [selected]="value == period"
+                (select)="updatePeriod(value)">
+          {{value}}
+        </option>
+      </select>
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="amount">Amount</label>
+    </th>
+    <th>
+      <input id="amount" type="number" value="{{getAmount()}}" (change)="updateAmount($event)">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="automaticUpdate">Automatic update</label>
+    </th>
+    <th>
+      <input #automaticUpdate id="automaticUpdate" type="checkbox">
+    </th>
+  </tr>
+</table>
+
+<table class="table">
+  <tr>
+    <th>
+      <button (click)="addReceiver()">Add receiver</button>
+    </th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>
+      Receiver
+    </th>
+    <th>
+      Received amount
+    </th>
+    <th>
+      Received fraction
+    </th>
+    <th></th>
+  </tr>
+
+  <tr *ngFor="let receiverBurden of receiverList; let i = index">
+    <th>
+      <select  id="receiver{{i}}">
+        <option *ngFor="let currentReceiver of memberList"
+                [selected]="receiverBurden.receiver.name == currentReceiver.name"
+                (select)="updateReceiver(currentReceiver, i)">
+          {{currentReceiver.name}}
+        </option>
+      </select>
+    </th>
+    <th>
+      <input type="number"
+             value="{{getReceiverAmount(receiverBurden.burden)}}"
+             (change)="updateFractionFromAmount($event, i)">
+    </th>
+    <th>
+      <input type="number" value="{{receiverBurden.burden}}" (change)="updateFraction($event, receiverBurden)">
+    </th>
+    <th>
+      <button (click)="removeReceiver(i)">Remove</button>
+    </th>
+  </tr>
+</table>
+<div class="button-row">
+  <button (click)="editPeriodicFlow(automaticUpdate.checked)">{{getButtonName()}}</button>
+  <button (click)="back.emit()">cancel</button>
+  <button *ngIf="periodicFlowIndex != null" (click)="removePeriodicFlow()"></button>
+</div>

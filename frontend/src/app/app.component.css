@@ -32,6 +32,8 @@
   height: 95%;
   background-color: #303030;
   color: white;
+
+  overflow: scroll;
 }
 
 .header-btn {

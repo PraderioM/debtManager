@@ -7,6 +7,9 @@ import { GroupComponent } from './group/group.component';
 import {HttpClientModule} from '@angular/common/http';
 import { GroupAddingComponent } from './home/group-adding/group-adding.component';
 import { SummaryComponent } from './group/summary/summary.component';
+import { PeriodicFlowsComponent } from './group/periodic-flows/periodic-flows.component';
+import { ReceiverBurdenComponent } from './group/periodic-flows/receiver-burden/receiver-burden.component';
+import { PeriodicFlowEditionComponent } from './group/periodic-flows/periodic-flow-edition/periodic-flow-edition.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { SummaryComponent } from './group/summary/summary.component';
     HomeComponent,
     GroupComponent,
     GroupAddingComponent,
-    SummaryComponent
+    SummaryComponent,
+    PeriodicFlowsComponent,
+    ReceiverBurdenComponent,
+    PeriodicFlowEditionComponent
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ export class GroupAddingComponent implements OnInit {
     };
   }
 
-  async tryCreateGame(name: string, mg1: string, mg2: string): Promise<void> {
+  async tryCreateGroup(name: string, mg1: string, mg2: string): Promise<void> {
     // Check for repeated names.
     for (const group of this.groupList) {
       if (group.name === name) {
