@@ -20,6 +20,7 @@ export class MembersComponent implements OnInit {
   constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
+    this.updateMembers();
   }
 
   async updateMembers(): Promise<void> {

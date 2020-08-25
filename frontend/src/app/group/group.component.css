@@ -16,6 +16,16 @@
   color: white;
 }
 
+.main-window {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  height: 95%;
+
+  overflow: scroll;
+}
+
 .header-btn {
   padding-left: 1%;
   padding-right: 1%;
