@@ -7,3 +7,4 @@
   <span (click)="selectItem('members')" [ngClass]="getNgClass('members')">Members</span>
   <span (click)="selectItem('settings')" [ngClass]="getNgClass('settings')">Settings</span>
 </div>
+<app-summary *ngIf="selectedItem == 'summary'"></app-summary>

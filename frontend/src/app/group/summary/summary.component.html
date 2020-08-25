@@ -1,0 +1,3 @@
+<p *ngFor="let flow of flowList">
+  {{flow.issuer.name}} must pay {{round(flow.amount)}} to {{flow.receiver.name}}
+</p>

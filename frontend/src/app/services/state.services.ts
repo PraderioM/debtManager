@@ -1,6 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Group} from './models/group';
+import {Flow} from './models/flow';
 
 @Injectable()
 export class StateService {
@@ -36,5 +37,12 @@ export class StateService {
       {
         params: new HttpParams().set('token', token).set('name', name).set('mailgun_1', mg1).set('mailgun_2', mg2)
       }).toPromise();
+  }
+
+  async getSummary(groupName: string): Promise<Flow[]> {
+    return await this.http
+      .get<Flow[]>(this.backendURL + '/get-summary',
+        {params: new HttpParams().set('group_name', groupName)})
+      .toPromise();
   }
 }
