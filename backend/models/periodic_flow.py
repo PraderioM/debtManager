@@ -77,7 +77,7 @@ class PeriodicFlow:
         }
 
     def generate_periodic_flows(self) -> List[Flow]:
-        # todo implement.
+        # Todo implement.
         pass
 
     @property
