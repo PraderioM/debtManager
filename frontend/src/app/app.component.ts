@@ -19,7 +19,7 @@ export class AppComponent implements OnInit  {
   constructor(private stateService: StateService) {}
 
   ngOnInit(): void {
-    this.updateToken();
+    this.getToken();
     this.updateGroupList();
 
     this.interval = setInterval(() => {
@@ -31,14 +31,14 @@ export class AppComponent implements OnInit  {
     this.groupList = await this.stateService.getGroupList();
   }
 
-  async updateToken(): Promise<void> {
-    this.token = await this.stateService.getToken();
+  async getToken(): Promise<void> {
+    if (this.token === null || this.token === undefined) {
+      this.token = await this.stateService.getToken();
+    }
   }
 
   async verifyConnection(): Promise<void> {
-    if (this.token === null || this.token === undefined) {
-      await this.updateToken();
-    }
+    await this.getToken();
     await this.stateService.verifyConnection(this.token);
   }
 
