@@ -1,9 +1,17 @@
+.container {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  flex-flow: wrap;
+}
+
 .toolbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 5%;
+  width: 100%;
 
   display: flex;
   flex-direction: row;
@@ -13,6 +21,16 @@
 
   background-color: #333333;
   font-weight: 600;
+  color: white;
+}
+
+.main-window {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  height: 95%;
+  background-color: #303030;
   color: white;
 }
 

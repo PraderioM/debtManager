@@ -9,6 +9,7 @@ import {Group} from '../services/models/group';
 export class HomeComponent implements OnInit {
   @Output() updateGroups = new EventEmitter<void>();
   @Input() groupList: Group[];
+  @Input() token: string;
 
   groupAdding = false;
 
@@ -20,5 +21,10 @@ export class HomeComponent implements OnInit {
   toggleGroupAdding(): void {
     this.groupAdding = !this.groupAdding;
   }
+
+  onGoBack(): void {
+    this.groupAdding = false;
+    this.updateGroups.emit();
+}
 
 }

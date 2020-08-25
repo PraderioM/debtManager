@@ -10,6 +10,7 @@ import {Group} from '../../services/models/group';
 export class GroupAddingComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Input() groupList: Group[];
+  @Input() token: string;
 
   errorInName = false;
 
@@ -20,7 +21,7 @@ export class GroupAddingComponent implements OnInit {
 
   getNameNgClass(): object {
     return {
-      error: !this.errorInName
+      error: this.errorInName
     };
   }
 
@@ -34,7 +35,7 @@ export class GroupAddingComponent implements OnInit {
     }
 
     // If name is not repeated then we can create a new group.
-    await this.stateService.addGroup(name, mg1, mg2);
+    await this.stateService.addGroup(this.token, name, mg1, mg2);
 
     // Once done we can go back and update groups.
     this.back.emit();

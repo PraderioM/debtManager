@@ -1,6 +1,23 @@
-<div class="toolbar" role="banner">
-  <span (click)="selectItem('home')" [ngClass]="getNgClass('home')">home</span>
-  <span *ngFor="let group of groupList" [ngClass]="getNgClass(group.name)">{{group.name}}</span>
-</div>
-<app-home *ngIf="selectedItem === 'home'" [groupList]="groupList" (updateGroups)="updateGroupList()"></app-home>
-<app-group *ngIf="selectedItem !== 'home'" [group]="getSelectedGroup()"></app-group>
+<table class="container">
+  <div class="toolbar" role="banner">
+    <span (click)="selectItem('home')"
+          [ngClass]="getNgClass('home')">
+      Home
+    </span>
+    <span *ngFor="let group of groupList"
+          (click)="selectItem(group.name)"
+          [ngClass]="getNgClass(group.name)">
+      {{group.name}}
+    </span>
+  </div>
+  <div class="main-window">
+    <app-home *ngIf="selectedItem == 'home'"
+              [token]="token"
+              [groupList]="groupList"
+              (updateGroups)="updateGroupList()">
+    </app-home>
+    <app-group *ngIf="selectedItem != 'home'"
+               [group]="getSelectedGroup()">
+    </app-group>
+  </div>
+</table>

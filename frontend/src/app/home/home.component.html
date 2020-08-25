@@ -1,2 +1,6 @@
-<button *ngIf="!groupAdding" (click)="toggleGroupAdding()">Add group</button>
-<app-group-adding *ngIf="groupAdding" [groupList]="groupList" (back)="updateGroups.emit()"></app-group-adding>
+<div class="container">
+  <button class="add-button" *ngIf="!groupAdding" (click)="toggleGroupAdding()">Add group</button>
+  <app-group-adding *ngIf="groupAdding" [token]="token" [groupList]="groupList" (back)="onGoBack()">
+
+  </app-group-adding>
+</div>

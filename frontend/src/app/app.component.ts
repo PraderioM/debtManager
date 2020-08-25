@@ -14,7 +14,7 @@ export class AppComponent implements OnInit  {
   selectedItem = 'home';
   interval;
   token: string;
-  groupList: Group[] = [new Group('group1', '', '')];
+  groupList: Group[] = [];
 
   constructor(private stateService: StateService) {}
 

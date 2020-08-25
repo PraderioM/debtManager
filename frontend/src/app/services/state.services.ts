@@ -30,11 +30,11 @@ export class StateService {
                        }).toPromise();
   }
 
-  async addGroup(name: string, mg1: string, mg2: string): Promise<void> {
-    await this.http.post<void>(this.backendURL + '/verify-connection',
+  async addGroup(token: string, name: string, mg1: string, mg2: string): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/add-group',
       '',
       {
-        params: new HttpParams().set('name', name).set('mailgun1', mg1).set('mailgun2', mg2)
+        params: new HttpParams().set('token', token).set('name', name).set('mailgun_1', mg1).set('mailgun_2', mg2)
       }).toPromise();
   }
 }
