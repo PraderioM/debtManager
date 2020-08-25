@@ -30,7 +30,7 @@ def get_compensating_flows(group_name: str) -> List[Flow]:
             debt_dict[flow.receiver.name] = 0.
         debt_dict[flow.receiver.name] += flow.amount
 
-    # Separate members into people that has payed more than received and vice versa.
+    # Separate members into people that have payed more than received and vice versa.
     all_members = get_members_data(group_name)
     more_issued: List[Tuple[Member, float]] = []
     more_received: List[Tuple[Member, float]] = []
@@ -52,19 +52,19 @@ def get_compensating_flows(group_name: str) -> List[Flow]:
         more_received_member, more_received_debt = more_received[0]
 
         if -more_issued_debt > more_received_debt:
-            # If more_received must pay less than what more_issued must receive more_issued_pays everything
+            # If more_received must pay less than what more_issued must receive, more_issued_pays everything
             # and is removed from list.
             amount = more_received_debt
             more_issued[0] = more_issued_member, more_issued_debt + more_received_debt
             more_received.pop(0)
         elif -more_issued_debt < more_received_debt:
-            # If the situation is the opposite the more_issued member receives all the money it must from the
+            # If the situation is the opposite, the more_issued member receives all the money from the
             # more_received member.
             amount = -more_issued_debt
             more_received[0] = more_received_member, more_issued_debt + more_received_debt
             more_issued.pop(0)
         else:
-            # If both debts cancel out we remove issuers from both lists.
+            # If both debts cancel out, we remove issuers from both lists.
             amount = more_received_debt
             more_received.pop(0)
             more_issued.pop(0)
