@@ -44,28 +44,20 @@ export class FlowEditionComponent implements OnInit {
     }
   }
 
-  async createFlow(amount: number): Promise<void> {
+  async createFlow(amount: number, concept: string): Promise<void> {
     // If name is not repeated then we can create a new member.
-    await this.stateService.addFlow(this.token, this.group.name, this.issuerName, this.receiverName, amount);
+    await this.stateService.addFlow(this.token, this.group.name, this.issuerName, this.receiverName, amount, concept);
 
     // Once done we can go back and update groups.
     this.back.emit();
   }
 
-  async updateFlow(flowIndex: number, amount: number): Promise<void> {
+  async updateFlow(flowIndex: number, amount: number, concept: string): Promise<void> {
     // If name is not repeated then we can create a new member.
-    await this.stateService.updateFlow(this.token, flowIndex, this.group.name, this.issuerName, this.receiverName, amount);
+    await this.stateService.updateFlow(this.token, flowIndex, this.group.name, this.issuerName, this.receiverName, amount, concept);
 
     // Once done we can go back and update groups.
     this.back.emit();
-  }
-
-  async editMember(amount: number): Promise<void> {
-    if (this.flowIndex == null) {
-      await this.createFlow(amount);
-    } else {
-      await this.updateFlow(this.flowIndex, amount);
-    }
   }
 
   updateIssuer(member: Member): void {
@@ -84,11 +76,11 @@ export class FlowEditionComponent implements OnInit {
     this.back.emit();
   }
 
-  async editFlow(amount: number): Promise<void> {
+  async editFlow(amount: number, concept: string): Promise<void> {
     if (this.flowIndex == null) {
-      await this.createFlow(amount);
+      await this.createFlow(amount, concept);
     } else {
-      await this.updateFlow(this.flowIndex, amount);
+      await this.updateFlow(this.flowIndex, amount, concept);
     }
   }
 }
