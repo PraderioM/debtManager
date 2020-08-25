@@ -59,7 +59,7 @@ def remove_periodic_flow_data(group_name: str, id_: int):
     periodic_flow_list = get_periodic_flow_data(group_name)
     periodic_flow_list.pop(id_)
 
-    # re-write all periodic flows in database except the removed one.
+    # Re-write all periodic flows in database except the removed one.
     with open(get_periodic_flow_data_file_path(group_name), 'w') as data_file:
         writer = csv.writer(data_file)
         for periodic_flow in periodic_flow_list:

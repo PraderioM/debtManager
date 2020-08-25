@@ -1,5 +1,7 @@
 from typing import Dict, List, Optional, Union
 
+from aiohttp import web
+
 
 class Member:
     def __init__(self, name: str, e_mail: Optional[str],
@@ -22,8 +24,17 @@ class Member:
     def from_frontend(cls, frontend_data: Dict[str, Union[str, float]]) -> 'Member':
         return Member(name=frontend_data['name'],
                       e_mail=frontend_data['eMail'],
-                      creditor_threshold=frontend_data['creditorThreshold'],
-                      debtor_threshold=frontend_data['debtorThreshold'])
+                      creditor_threshold=frontend_data['creditor_threshold'],
+                      debtor_threshold=frontend_data['debtor_threshold'])
+
+    @classmethod
+    def pre_process_request(cls, request: web.Request) -> Dict:
+        return {
+            'name': request.rel_url.query['name'],
+            'e_mail': request.rel_url.query['e_mail'],
+            'creditor_threshold': float(request.rel_url.query['creditor_threshold']),
+            'debtor_threshold': float(request.rel_url.query['debtor_threshold']),
+        }
 
     def to_database(self) -> List[str]:
         return [self.name, self.e_mail, str(self.creditor_threshold), str(self.debtor_threshold)]
