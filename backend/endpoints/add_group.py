@@ -6,23 +6,20 @@ from backend.models.group import Group
 
 
 async def add_group(request: web.Request) -> web.Response:
-    data = await request.post()
+    token = request.rel_url.query['token']
 
     # Checking if member is locked.
-    token = data["token"]
     if is_locked(token):
         return web.Response(
             status=200,
-            body="Another person is using the app, sorry. You cannot modify stuff."
         )
 
     # Extracting inputs from frontend.
-    database_data = [data["name"], data["mailgun_1"], data["mailgun_2"]]
+    database_data = [request.rel_url.query[val] for val in ["name", "mailgun_1", "mailgun_2"]]
     group = Group.from_database(database_data)
 
     # Adding flow inputs from frontend into database.
     add_group_data(group)
     return web.Response(
         status=201,
-        body="Group added successfully."
     )

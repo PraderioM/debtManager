@@ -6,7 +6,8 @@ from backend.utils.utils import date_from_iso_format, get_member_by_name
 
 
 class Flow:
-    def __init__(self, issuer: Member, receiver: Member, amount: float, concept: str, date: Optional[datetime.date]):
+    def __init__(self, issuer: Member, receiver: Member, amount: float, concept: str,
+                 date: Optional[datetime.date] = None):
         self.issuer = issuer
         self.receiver = receiver
         self.amount = amount
