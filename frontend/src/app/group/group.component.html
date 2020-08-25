@@ -8,4 +8,5 @@
   <span (click)="selectItem('settings')" [ngClass]="getNgClass('settings')">Settings</span>
 </div>
 <app-summary *ngIf="selectedItem == 'summary'" [group]="group"></app-summary>
-<app-periodic-flows *ngIf="selectedItem == 'periodic flows'" [group]="group"></app-periodic-flows>
+<app-periodic-flows *ngIf="selectedItem == 'periodic flows'" [group]="group" [token]="token"></app-periodic-flows>
+<app-members *ngIf="selectedItem == 'members'" [group]="group" [token]="token"></app-members>

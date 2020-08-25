@@ -11,6 +11,7 @@ import {PeriodicFlow, ReceiverBurden} from '../../../services/models/periodic.fl
 })
 export class PeriodicFlowEditionComponent implements OnInit {
   @Input() group: Group;
+  @Input() token: string;
   @Input() periodicFlow?: PeriodicFlow;
   @Input() periodicFlowIndex?: number;
 

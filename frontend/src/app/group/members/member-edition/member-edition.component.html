@@ -1,0 +1,48 @@
+<table class="table">
+  <tr>
+    <th>
+      <label for="name" [ngClass]="getNameNgClass()">Name</label>
+    </th>
+    <th>
+      <input #name id="name" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="eMail">e-mail</label>
+    </th>
+    <th>
+      <input #eMail id="eMail" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="creditorThr">Creditor threshold</label>
+    </th>
+    <th>
+      <input #creditorThr id="creditorThr" type="number" value="{{creditorThr}}">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="debtorThr">Debtor threshold</label>
+    </th>
+    <th>
+      <input #debtorThr id="debtorThr" type="number" value="{{debtorThr}}">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <button (click)="editMember(name.value, eMail.value, creditorThr.valueAsNumber, debtorThr.valueAsNumber)">
+        {{getButtonName()}}
+      </button>
+      <button (click)="back.emit()">
+        Cancel
+      </button>
+    </th>
+  </tr>
+</table>

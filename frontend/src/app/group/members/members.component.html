@@ -1,0 +1,17 @@
+<div *ngIf="!editionMode">
+  <p>
+    <button (click)="enterCreationMode()">Add member</button>
+  </p>
+  <p *ngFor="let member of memberList">
+    members works!
+  </p>
+</div>
+<app-member-addition *ngIf="editionMode"
+                    [group]="group"
+                    [member]="selectedMember"
+                    [memberIndex]="selectedMemberIndex"
+                    [memberList]="memberList"
+                     [token]="token"
+                    (back)="onBackFromEdition()">
+
+</app-member-addition>

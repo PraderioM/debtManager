@@ -10,6 +10,8 @@ import { SummaryComponent } from './group/summary/summary.component';
 import { PeriodicFlowsComponent } from './group/periodic-flows/periodic-flows.component';
 import { ReceiverBurdenComponent } from './group/periodic-flows/receiver-burden/receiver-burden.component';
 import { PeriodicFlowEditionComponent } from './group/periodic-flows/periodic-flow-edition/periodic-flow-edition.component';
+import { MembersComponent } from './group/members/members.component';
+import { MemberEditionComponent } from './group/members/member-edition/member-edition.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PeriodicFlowEditionComponent } from './group/periodic-flows/periodic-fl
     SummaryComponent,
     PeriodicFlowsComponent,
     ReceiverBurdenComponent,
-    PeriodicFlowEditionComponent
+    PeriodicFlowEditionComponent,
+    MembersComponent,
+    MemberEditionComponent
   ],
   imports: [
     BrowserModule,

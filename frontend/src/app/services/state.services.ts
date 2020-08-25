@@ -69,4 +69,25 @@ export class StateService {
         {params: new HttpParams().set('group_name', groupName).set('id', periodicFlowIndex.toString())})
       .toPromise();
   }
+
+  async addMember(token: string, groupName: string, name: string, eMail: string, creditorThr: number, debtorThr: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/add-member',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName).set('name', name)
+                                .set('e_mail', eMail).set('creditor_thr', creditorThr.toString())
+                                .set('debtor_thr', debtorThr.toString())
+      }).toPromise();
+  }
+
+  async updateMember(token: string, groupName: string, memberIndex: number,
+                     name: string, eMail: string, creditorThr: number, debtorThr: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/update-member',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('group_name', groupName).set('id', memberIndex.toString())
+                                .set('name', name).set('e_mail', eMail).set('creditor_thr', creditorThr.toString())
+                                .set('debtor_thr', debtorThr.toString())
+      }).toPromise();
+  }
 }

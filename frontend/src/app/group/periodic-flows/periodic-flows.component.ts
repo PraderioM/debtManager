@@ -10,6 +10,7 @@ import {StateService} from '../../services/state.services';
 })
 export class PeriodicFlowsComponent implements OnInit {
   @Input() group: Group;
+  @Input() token: string;
 
   periodicFlowList: PeriodicFlow[];
   selectedPeriodicFlow?: PeriodicFlow;

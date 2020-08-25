@@ -11,6 +11,7 @@
 </div>
 <app-periodic-flow-edition *ngIf="editionMode"
                            [group]="group"
+                           [token]="token"
                            [periodicFlow]="selectedPeriodicFlow"
                            [periodicFlowIndex]="selectedPeriodicFlowIndex"
                            (back)="onBackFromEdition()">
