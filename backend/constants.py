@@ -1,5 +1,5 @@
 DATA_DIR_PATH = '../data'
-LOCK_FILE_NAME = 'is_connected.json'
+LOCK_FILE_NAME = 'last_connected.json'
 GROUP_DATA_FILE_NAME = 'groups.csv'
 MEMBERS_DATA_FILE_NAME = 'members.csv'
 PERIODIC_FLOW_DATA_FILE_NAME = 'periodic_flows.csv'

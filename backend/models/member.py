@@ -33,7 +33,7 @@ class Member:
             'name': self.name,
             'eMail': self.e_mail,
             'creditorThreshold': self.creditor_threshold,
-            'debtor_threshold': self.debtor_threshold
+            'debtorThreshold': self.debtor_threshold
         }
 
     @property

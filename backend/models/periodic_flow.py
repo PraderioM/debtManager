@@ -44,8 +44,8 @@ class PeriodicFlow:
     @classmethod
     def from_frontend(cls, frontend_data: Dict):
         receiver_list = [
-            (Member.from_frontend(member_data), burden)
-            for member_data, burden in frontend_data['receiverList']
+            (Member.from_frontend(receiver_dict['receiver']), receiver_dict['burden'])
+            for receiver_dict in frontend_data['receiverList']
         ]
         return PeriodicFlow(amount_payed=frontend_data['amountPayed'],
                             period=frontend_data['period'],
@@ -66,7 +66,13 @@ class PeriodicFlow:
             'payDay': self.pay_day,
             'lastPayed': str(self.last_payed),
             'issuer': self.issuer.to_frontend(),
-            'receiverList': [(receiver.to_frontend(), burden) for receiver, burden in self.receiver_list],
+            'receiverList': [
+                {
+                    'receiver': receiver.to_frontend(),
+                    'burden': burden
+                }
+                for receiver, burden in self.receiver_list
+            ],
             'isUpdateAutomatic': self.is_update_automatic
         }
 

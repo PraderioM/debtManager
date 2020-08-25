@@ -2,6 +2,7 @@ import json
 from datetime import datetime, timedelta
 
 from backend.utils.get_path_utils import get_lock_data_file_path
+from backend.utils.utils import datetime_from_iso_format
 
 
 def is_locked(token: str, secs_thr: int = 5) -> bool:
@@ -14,7 +15,7 @@ def is_locked(token: str, secs_thr: int = 5) -> bool:
 
     # Otherwise we must check if its been enough time since last connection. If so then database is not blocked.
     now = datetime.now()
-    last_connection = datetime.fromisoformat(json_data['last_connection'])
+    last_connection = datetime_from_iso_format(json_data['last_connection'])
     if now - last_connection > timedelta(seconds=secs_thr):
         return False
 

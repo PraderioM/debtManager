@@ -1,5 +1,4 @@
 from datetime import date
-import csv
 
 from aiohttp import web
 

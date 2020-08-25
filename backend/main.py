@@ -39,11 +39,11 @@ def loop_in_thread(event_loop: asyncio.BaseEventLoop, function: Callable):
 
 
 if __name__ == "__main__":
-    # Create and run web app.
+    # Run continuous checks.
     loop = asyncio.get_event_loop()
+    # threading.Thread(target=loop_in_thread, args=(loop, check_periodic_debts)).start()
+    # threading.Thread(target=loop_in_thread, args=(loop, check_messages_to_send)).start()
+
+    # Create and run web app.
     app = loop.run_until_complete(create_app())
     web.run_app(app, host=os.environ.get('HOST', '0.0.0.0'), port=os.environ.get('PORT', 2121))
-
-    # Run continuous checks.
-    threading.Thread(target=loop_in_thread, args=(loop, check_periodic_debts)).start()
-    threading.Thread(target=loop_in_thread, args=(loop, check_messages_to_send)).start()
