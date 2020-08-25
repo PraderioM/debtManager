@@ -1,0 +1,40 @@
+<table class="table">
+  <tr>
+    <th>
+      name
+    </th>
+    <th>
+      {{group.name}}
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="mg1">Mailgun 1</label>
+    </th>
+    <th>
+      <input #mg1 id="mg1" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <label for="mg2">Mailgun 2</label>
+    </th>
+    <th>
+      <input #mg2 id="mg2" type="text" value="">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
+      <button
+        (click)="modifyGroup(mg1.value, mg2.value)">
+        Edit
+      </button>
+      <button (click)="removeGroup()">
+        Remove
+      </button>
+    </th>
+  </tr>
+</table>

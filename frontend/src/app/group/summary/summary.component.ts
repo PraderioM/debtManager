@@ -29,6 +29,6 @@ export class SummaryComponent implements OnInit {
   }
 
   async addFlow(flow: Flow): Promise<void> {
-    await this.stateService.addFlow(this.token, this.group.name, flow.issuer.name, flow.receiver.name, flow.amount);
+    await this.stateService.addFlow(this.token, this.group.name, flow.issuer.name, flow.receiver.name, flow.amount, flow.concept);
   }
 }

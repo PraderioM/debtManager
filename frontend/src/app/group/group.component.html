@@ -11,3 +11,11 @@
 <app-periodic-flows *ngIf="selectedItem == 'periodic flows'" [group]="group" [token]="token"></app-periodic-flows>
 <app-flows *ngIf="selectedItem == 'flows'" [group]="group" [token]="token"></app-flows>
 <app-members *ngIf="selectedItem == 'members'" [group]="group" [token]="token"></app-members>
+<app-settings *ngIf="selectedItem == 'settings'"
+              [group]="group"
+              [groupIndex]="groupIndex"
+              [token]="token"
+              (remove)="back.emit()"
+              (back)="refresh.emit()">
+
+</app-settings>

@@ -10,6 +10,15 @@
 
   <tr>
     <th>
+      <label for="concept">concept</label>
+    </th>
+    <th>
+      <input #concept id="concept" type="text" value="{{flow.concept}}">
+    </th>
+  </tr>
+
+  <tr>
+    <th>
       issuer
     </th>
     <th>
@@ -48,7 +57,7 @@
 
   <tr>
     <th>
-      <button (click)="editFlow(amount.value)">
+      <button (click)="editFlow(amount.valueAsNumber, concept.value)">
         {{getButtonName()}}
       </button>
     </th>

@@ -99,13 +99,14 @@ export class StateService {
       }).toPromise();
   }
 
-  async addFlow(token: string, groupName: string, issuerName: string, receiverName: string, amount: number): Promise<void> {
+  async addFlow(token: string, groupName: string, issuerName: string, receiverName: string,
+                amount: number, concept: string): Promise<void> {
     await this.http.post<void>(this.backendURL + '/add-flow',
       '',
       {
         params: new HttpParams().set('token', token).set('group_name', groupName)
                                 .set('issuer_name', issuerName).set('receiver_name', receiverName)
-                                .set('amount', amount.toString())
+                                .set('amount', amount.toString()).set('concept', concept)
       }).toPromise();
   }
 
@@ -118,14 +119,14 @@ export class StateService {
 
   async updateFlow(token: string, flowIndex: number, groupName: string,
                    issuerName: string, receiverName: string,
-                   amount: number): Promise<void> {
+                   amount: number, concept: string): Promise<void> {
     await this.http.post<void>(this.backendURL + '/modify-flow',
       '',
       {
         params: new HttpParams().set('token', token).set('group_name', groupName)
           .set('flow_index', flowIndex.toString())
           .set('issuer_name', issuerName).set('receiver_name', receiverName)
-          .set('amount', amount.toString())
+          .set('amount', amount.toString()).set('concept', concept)
       }).toPromise();
   }
 
@@ -134,6 +135,23 @@ export class StateService {
       '',
       {
         params: new HttpParams().set('token', token).set('group_name', groupName).set('id', flowIndex.toString())
+      }).toPromise();
+  }
+
+  async updateGroup(token: string, groupIndex: number, groupName: string, mailgun1: string, mailgun2: string): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/update-group',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('id', groupIndex.toString()).set('group_name', groupName)
+                                .set('mailgun_1', mailgun1).set('mailgun_2', mailgun2)
+      }).toPromise();
+  }
+
+  async removeGroup(token: string, groupIndex: number): Promise<void> {
+    await this.http.post<void>(this.backendURL + '/remove-group',
+      '',
+      {
+        params: new HttpParams().set('token', token).set('id', groupIndex.toString())
       }).toPromise();
   }
 }

@@ -5,6 +5,9 @@
   <table>
     <tr>
       <th>
+        date
+      </th>
+      <th>
         issuer
       </th>
       <th>
@@ -18,16 +21,19 @@
     </tr>
     <tr *ngFor="let flow of flowList; let i = index">
       <th>
-        {{flow.issuer.name}}
+        {{flowList[flowList.length - i - 1].date}}
       </th>
       <th>
-        {{flow.receiver.name}}
+        {{flowList[flowList.length - i - 1].issuer.name}}
       </th>
       <th>
-        {{round(flow.amount)}}
+        {{flowList[flowList.length - i - 1].receiver.name}}
       </th>
       <th>
-        <button (click)="enterModificationMode(flow, i)">Edit</button>
+        {{round(flowList[flowList.length - i - 1].amount)}}
+      </th>
+      <th>
+        <button (click)="enterModificationMode(flowList[flowList.length - i - 1], flowList.length - i - 1)">Edit</button>
       </th>
     </tr>
   </table>

@@ -18,7 +18,10 @@
     </app-home>
     <app-group *ngIf="selectedItem != 'home'"
                [group]="getSelectedGroup()"
-               [token]="token">
+               [groupIndex]="getSelectedGroupIndex()"
+               [token]="token"
+               (back)="onBackHome()"
+               (refresh)="onRefresh(getSelectedGroup().name)">
     </app-group>
   </div>
 </table>

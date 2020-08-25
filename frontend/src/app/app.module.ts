@@ -14,6 +14,7 @@ import { MembersComponent } from './group/members/members.component';
 import { MemberEditionComponent } from './group/members/member-edition/member-edition.component';
 import { FlowsComponent } from './group/flows/flows.component';
 import { FlowEditionComponent } from './group/flows/flow-edition/flow-edition.component';
+import { SettingsComponent } from './group/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FlowEditionComponent } from './group/flows/flow-edition/flow-edition.co
     MembersComponent,
     MemberEditionComponent,
     FlowsComponent,
-    FlowEditionComponent
+    FlowEditionComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
