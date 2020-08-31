@@ -5,9 +5,9 @@ from backend.endpoints.add_group import add_group
 from backend.endpoints.verify_connection import verify_connection
 from backend.endpoints.get_token import get_token
 from backend.endpoints.get_summary import get_summary
-from backend.endpoints.get_periodic_flows_list import get_periodic_flows_list
+from backend.endpoints.get_periodic_flows import get_periodic_flows_list
 from backend.endpoints.get_flow_list import get_flow_list
-from backend.endpoints.get_member_list import get_member_list
+from backend.endpoints.get_member import get_member_list
 from backend.endpoints.get_group_list import get_group_list
 
 

@@ -2,7 +2,6 @@ from aiohttp import web
 
 from backend.utils.lock_utils import is_locked
 from backend.utils.add_data_utils import add_member_data
-from backend.utils.get_data_utils import get_members_data
 from backend.models.member import Member
 
 
