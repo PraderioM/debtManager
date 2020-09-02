@@ -1,5 +1,7 @@
+from aiohttp import web
 import datetime
 from typing import Dict, List, Optional
+
 
 from backend.models.member import Member
 from backend.utils.utils import date_from_iso_format, get_member_by_name
@@ -30,6 +32,16 @@ class Flow:
                     amount=frontend_data['amount'],
                     concept=frontend_data['concept'],
                     date=date_from_iso_format(frontend_data['date']))
+
+    @classmethod
+    def pre_process_request(cls, request: web.Request) -> Dict:
+        return {
+            'issuer': request.rel_url.query['issuer'],
+            'receiver': request.rel_url.query['receiver'],
+            'amount': float(request.rel_url.query['amount']),
+            'concept': request.rel_url.query['concept'],
+            'date': request.rel_url.query['date']
+        }
 
     def to_database(self) -> List[str]:
         return [self.issuer.name, self.receiver.name, str(self.amount), self.concept, str(self.date)]
